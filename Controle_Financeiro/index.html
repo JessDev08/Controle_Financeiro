@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Controle Financeiro</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="container" role="main">
+    <h1>Controle Financeiro</h1>
+
+    <form id="formLancamento" class="form-group" aria-label="Adicionar lançamento financeiro">
+      <label for="descricao" class="sr-only">Descrição</label>
+      <input type="text" id="descricao" name="descricao" placeholder="Descrição" autocomplete="off" required />
+
+      <label for="valor" class="sr-only">Valor</label>
+      <input type="number" id="valor" name="valor" placeholder="Valor" step="0.01" min="0.01" required />
+
+      <label for="tipo" class="sr-only">Tipo</label>
+      <select id="tipo" name="tipo" required>
+        <option value="receita">Receita</option>
+        <option value="despesa">Despesa</option>
+      </select>
+
+      <button type="submit" aria-label="Adicionar lançamento">Adicionar</button>
+    </form>
+
+    <div class="toggle-tema">
+      <label for="modoEscuro">Modo Escuro</label>
+      <input type="checkbox" id="modoEscuro" aria-checked="false" />
+    </div>
+
+    <h2>Extrato</h2>
+    <ul id="extrato" aria-live="polite" aria-label="Lista de lançamentos"></ul>
+
+    <div class="summary" aria-label="Resumo financeiro">
+      <p>Receitas: R$ <span id="total-receitas">0.00</span></p>
+      <p>Despesas: R$ <span id="total-despesas">0.00</span></p>
+      <p><strong>Saldo: R$ <span id="saldo">0.00</span></strong></p>
+    </div>
+
+    <div class="chart-container" aria-label="Gráfico de receitas e despesas">
+      <canvas id="grafico" role="img" aria-describedby="graficoDesc"></canvas>
+      <p id="graficoDesc" class="sr-only">Gráfico de pizza mostrando a proporção de receitas e despesas</p>
+    </div>
+
+    <div class="export-buttons">
+      <button id="btnExportJson" type="button">Exportar JSON</button>
+      <button id="btnExportExcel" type="button">Exportar para Excel</button>
+    </div>
+  </div>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
